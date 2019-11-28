@@ -1,4 +1,4 @@
-# VBA-StringToColumn---2-types
+# VBA-Functions
 
 
 'Takes a string value and looks for that value in the range row provided. _
@@ -78,5 +78,19 @@ Private Function StringToColumn(lookupValue As String, lookupRow As Integer, loo
         End If
         
     End With
+    
+End Function
+
+'Returns the number of the last row in a column 
+Private Function LastRow(lookupColumn As String, lookupSheet As Worksheet) As Integer
+
+    LastRow = lookupSheet.Range(lookupColumn & Rows.Count).End(xlUp).Row
+
+End Function
+
+'Returns the number of the last column in a row 
+Private Function LastColumn(lookupRow As Integer, lookupSheet As Worksheet) As Integer
+
+    LastColumn = lookupSheet.Cells(lookupRow, Columns.Count).End(xlToLeft).Column
     
 End Function
