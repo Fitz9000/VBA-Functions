@@ -82,7 +82,7 @@ Private Function StringToColumn(lookupValue As String, lookupRow As Integer, loo
 End Function
 
 'Returns the number of the last row in a column 
-Private Function LastRow(lookupColumn As String, lookupSheet As Worksheet) As Integer
+Private Function LastRow(lookupColumn As String, lookupSheet As Worksheet) As long
 
     LastRow = lookupSheet.Range(lookupColumn & Rows.Count).End(xlUp).Row
 
