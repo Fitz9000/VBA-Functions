@@ -94,3 +94,22 @@ Private Function LastColumn(lookupRow As Integer, lookupSheet As Worksheet) As I
     LastColumn = lookupSheet.Cells(lookupRow, Columns.Count).End(xlToLeft).Column
     
 End Function
+
+'Delete column with a string in the first row
+Sub deleteColumn(stringToDelete As String)
+
+    Dim lastCol As Long
+    Dim row As Long
+    Dim iCol As Long
+    Dim delString As String
+    
+    delString = stringToDelete
+    row = 1
+    lastCol = Sheet1.Cells(row, Columns.Count).End(xlToLeft).Column
+    
+    For iCol = lastCol To 1 Step -1
+        If Cells(1, iCol) = delString Then 'You can change this text
+            Columns(iCol).Delete
+        End If
+    Next
+End Sub
