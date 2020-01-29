@@ -116,27 +116,28 @@ End Sub
 
 'Sort up to 10 columns by header provided - requires exact matches
 'Additional columns can be sorted by extended this sub
-Sub OrderColumns(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 As String)
+Sub OrderColumns(col1, Optional col2 = "", Optional col3 = "", Optional col4 = "", Optional col5 = "", _
+Optional col6 = "", Optional col7 = "", Optional col8 = "", Optional col9 = "", Optional col10 As String = "")
 
-    Dim colOrder As Variant
-    Dim col As Integer
-    Dim search As Range
-    Dim index As Integer
-        
-    colOrder = Array(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10)
-    col = 1
+Dim colOrder As Variant
+Dim col As Integer
+Dim search As Range
+Dim index As Integer
     
-    For index = LBound(colOrder) To UBound(colOrder)
-        Set search = Rows("1:1").Find(colOrder(index), LookIn:=xlValues, LookAt:=xlWhole, _
-            SearchOrder:=xlByColumns, SearchDirection:=xlNext, MatchCase:=False)
-        If Not search Is Nothing Then
-            If search.Column <> col Then
-                search.EntireColumn.Cut
-                Columns(col).Insert Shift:=xlToRight
-                Application.CutCopyMode = False
-            End If
-        col = col + 1
+colOrder = Array(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10)
+col = 1
+
+For index = LBound(colOrder) To UBound(colOrder)
+    Set search = Rows("1:1").Find(colOrder(index), LookIn:=xlValues, LookAt:=xlWhole, _
+        SearchOrder:=xlByColumns, SearchDirection:=xlNext, MatchCase:=False)
+    If Not search Is Nothing Then
+        If search.Column <> col Then
+            search.EntireColumn.Cut
+            Columns(col).Insert Shift:=xlToRight
+            Application.CutCopyMode = False
         End If
-    Next index
-    
+    col = col + 1
+    End If
+Next index
+
 End Sub
