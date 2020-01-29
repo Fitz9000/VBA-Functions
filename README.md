@@ -95,7 +95,7 @@ Private Function LastColumn(lookupRow As Integer, lookupSheet As Worksheet) As I
     
 End Function
 
-'Delete column with a string in the first row
+'Delete column with a string in the first row - requires exact match
 Sub deleteColumn(stringToDelete As String)
 
     Dim lastCol As Long
@@ -112,4 +112,31 @@ Sub deleteColumn(stringToDelete As String)
             Columns(iCol).Delete
         End If
     Next
+End Sub
+
+'Sort up to 10 columns by header provided - requires exact matches
+'Additional columns can be sorted by extended this sub
+Sub OrderColumns(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 As String)
+
+    Dim colOrder As Variant
+    Dim col As Integer
+    Dim search As Range
+    Dim index As Integer
+        
+    colOrder = Array(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10)
+    col = 1
+    
+    For index = LBound(colOrder) To UBound(colOrder)
+        Set search = Rows("1:1").Find(colOrder(index), LookIn:=xlValues, LookAt:=xlWhole, _
+            SearchOrder:=xlByColumns, SearchDirection:=xlNext, MatchCase:=False)
+        If Not search Is Nothing Then
+            If search.Column <> col Then
+                search.EntireColumn.Cut
+                Columns(col).Insert Shift:=xlToRight
+                Application.CutCopyMode = False
+            End If
+        col = col + 1
+        End If
+    Next index
+    
 End Sub
