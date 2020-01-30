@@ -141,3 +141,30 @@ For index = LBound(colOrder) To UBound(colOrder)
 Next index
 
 End Sub
+
+'Returns true if the spreadsheet is not missing any of the header parameters
+Private Function VerifyData(h1, h2, h3, h4, h5, h6, h7, h8, h9 As String) As Boolean
+
+    Dim requiredHeaders As Variant
+    Dim search As Range
+    Dim index As Integer
+    Dim missingVals As Integer
+    
+    requiredHeaders = Array(h1, h2, h3, h4, h5, h6, h7, h8, h9)
+    missingVals = 0
+    
+    For index = LBound(requiredHeaders) To UBound(requiredHeaders)
+        Set search = Rows("1:1").Find(requiredHeaders(index), LookIn:=xlValues, LookAt:=xlWhole, _
+            SearchOrder:=xlByColumns, SearchDirection:=xlNext, MatchCase:=False)
+        If search Is Nothing Then
+        missingVals = missingVals + 1
+        End If
+    Next index
+    
+    If missingVals > 0 Then
+        VerifyData = False
+    Else
+        VerifyData = True
+    End If
+
+End Function
