@@ -166,5 +166,26 @@ Private Function VerifyData(h1, h2, h3, h4, h5, h6, h7, h8, h9 As String) As Boo
     Else
         VerifyData = True
     End If
+    
+'highlight cells containing text
+Sub find_highlight()
+
+Dim W As String, rng As Range
+ 
+ W = 6123933
+
+ For Each rng In ActiveSheet.UsedRange
+    If rng.Value = W Then
+        rng.Select
+        With Selection.Interior
+            .ColorIndex = 27
+            .Pattern = xlSolid
+            .PatternColorIndex = xlAutomatic
+        End With
+    End If
+ Next rng
+ 
+End Sub
+   
 
 End Function
