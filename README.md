@@ -204,3 +204,32 @@ Private Function IsInArray(stringToBeFound As String, arr As Variant) As Boolean
     IsInArray = False
 
 End Function
+
+'Returns TRUE if the spreadsheet is not missing any of the header parameters in the order provided
+Private Function VerifyData(h1, h2, h3 As String, sheetSearch As Worksheet) As Boolean
+
+    Dim requiredHeaders As Variant
+    Dim index As Integer
+    Dim errorCount As Integer
+    Dim iCell As Integer
+    
+    iCell = 1
+    errorCount = 0
+    
+    requiredHeaders = Array(h1, h2, h3)
+    
+    For index = LBound(requiredHeaders) To UBound(requiredHeaders)
+        If Cells(1, iCell).Value <> requiredHeaders(index) Then
+            MsgBox Array(index)
+            errorCount = errorCount + 1
+        End If
+        iCell = iCell + 1
+    Next index
+    
+    If errorCount > 0 Then
+        VerifyData = False
+    Else
+        VerifyData = True
+    End If
+
+End Function
