@@ -41,6 +41,8 @@ Private Function StringToColumn(lookupValue As String, lookupRow As Integer, loo
     
 End Function
 
+# ---------------------------------------------------------------------------------------------------------------------------------------
+
 'Takes a string value and looks for that value in the range row provided. _
  The return value is the letter of the column in which the string is found. _
  The input for lookupSheet is a 'WORKSHEET'.
@@ -81,6 +83,8 @@ Private Function StringToColumn(lookupValue As String, lookupRow As Integer, loo
     
 End Function
 
+# ---------------------------------------------------------------------------------------------------------------------------------------
+
 'Returns the number of the last row in a column 
 Private Function LastRow(lookupColumn As String, lookupSheet As Worksheet) As long
 
@@ -88,12 +92,16 @@ Private Function LastRow(lookupColumn As String, lookupSheet As Worksheet) As lo
 
 End Function
 
+# ---------------------------------------------------------------------------------------------------------------------------------------
+
 'Returns the number of the last column in a row 
 Private Function LastColumn(lookupRow As Integer, lookupSheet As Worksheet) As Integer
 
     LastColumn = lookupSheet.Cells(lookupRow, Columns.Count).End(xlToLeft).Column
     
 End Function
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
 
 'Delete column with a string in the first row - requires exact match
 Sub deleteColumn(stringToDelete As String)
@@ -113,6 +121,8 @@ Sub deleteColumn(stringToDelete As String)
         End If
     Next
 End Sub
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
 
 'Sort up to 10 columns by header provided - requires exact matches
 'Additional columns can be sorted by extended this sub
@@ -141,6 +151,8 @@ For index = LBound(colOrder) To UBound(colOrder)
 Next index
 
 End Sub
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
 
 'Returns true if the spreadsheet is not missing any of the header parameters
 Private Function VerifyData(h1, h2, h3, h4, h5, h6, h7, h8, h9 As String) As Boolean
@@ -190,6 +202,8 @@ End Sub
 
 End Function
 
+# ---------------------------------------------------------------------------------------------------------------------------------------
+
 'Returns true if lookup string is in array
 Private Function IsInArray(stringToBeFound As String, arr As Variant) As Boolean
 
@@ -204,6 +218,8 @@ Private Function IsInArray(stringToBeFound As String, arr As Variant) As Boolean
     IsInArray = False
 
 End Function
+
+# ---------------------------------------------------------------------------------------------------------------------------------------
 
 'Returns TRUE if the spreadsheet is not missing any of the header parameters in the order provided
 Private Function VerifyData(h1, h2, h3 As String, sheetSearch As Worksheet) As Boolean
@@ -234,7 +250,15 @@ Private Function VerifyData(h1, h2, h3 As String, sheetSearch As Worksheet) As B
 
 End Function
 
+# ---------------------------------------------------------------------------------------------------------------------------------------
+
 'Highlights a set of cells if certain conditions are met in both
+Sub test()
+
+highlightIf Range("A2:A10"), 1
+
+End Sub
+
 Function highlightIf(colRng1 As Range, offset As Integer)
 
 Dim cell As Range
