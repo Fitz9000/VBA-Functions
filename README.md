@@ -222,9 +222,8 @@ End Function
 # ------------------------------------------------------------------------------
 
 'Returns TRUE if the spreadsheet is not missing any of the header parameters in the order provided
-Private Function VerifyData(h1, h2, h3 As String, sheetSearch As Worksheet) As Boolean
+Private Function VerifyDataOrdered(sheetSearch As Worksheet, requiredHeaders As Variant) As Boolean
 
-    Dim requiredHeaders As Variant
     Dim index As Integer
     Dim errorCount As Integer
     Dim iCell As Integer
@@ -232,11 +231,8 @@ Private Function VerifyData(h1, h2, h3 As String, sheetSearch As Worksheet) As B
     iCell = 1
     errorCount = 0
     
-    requiredHeaders = Array(h1, h2, h3)
-    
     For index = LBound(requiredHeaders) To UBound(requiredHeaders)
-        If Cells(1, iCell).Value <> requiredHeaders(index) Then
-            MsgBox Array(index)
+        If sheetSearch.Cells(1, iCell).Value <> requiredHeaders(index) Then
             errorCount = errorCount + 1
         End If
         iCell = iCell + 1
