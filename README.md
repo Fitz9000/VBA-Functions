@@ -233,3 +233,23 @@ Private Function VerifyData(h1, h2, h3 As String, sheetSearch As Worksheet) As B
     End If
 
 End Function
+
+'Highlights a set of cells if certain conditions are met in both
+Function highlightIf(colRng1 As Range, offset As Integer)
+
+Dim cell As Range
+Dim endDataLine As Long: endDataLine = 5
+
+'For each cell in aRange
+For Each cell In colRng1
+
+    'If some condition in col1 and col2 is met,then
+    If cell.Value = "fruit" And cell.offset(0, offset).Value = "apple" Then
+        ' Fill the cell yellow
+        cell.Interior.ColorIndex = 6
+        cell.offset(0, offset).Interior.ColorIndex = 6
+    End If
+    
+Next cell
+
+End Function
